@@ -1,18 +1,18 @@
-/***  Rotational Brownian Motion, Ver 1.2, Date: 14010227 *********************
+/***  Rotational Brownian Motion, Ver 1.2, Date: 17 May 2022 ******************
  ***                                                                        ***
- ***  Copyleft (ɔ) F. Bolhasani 2020-22, All lefts reserved!                ***
+ ***  Copyleft (ɔ) Nasim 2020-22, All lefts reserved!                       ***
  ***                                                                        ***
  ******************************************************************************
 
- * You can compile this code by the following command in the shell in the
+ * You can compile this code by the following command in the shell on a
  * single-core machine:
  * > g++ -o rbm rbm.cpp utils.cpp random.cpp vec.cpp -std=c++1z -Ofast
- * , then execute it in the shell by
+ *, then execute it in the shell by
  * > ./rbm
  
 
  * This code is under construction. It might contain some errors.
- * So you can try it with your own risk!
+ * So you can try it at your own risk!
  */
 
 //#define DEBUG_MODE                          // Activate debug mode
@@ -42,7 +42,7 @@ const int NR = 500;                          // Number of realization
 const int L = 30;                           // L x L unit cell lattice
 const int N = sqr(L);                       // Number of dipoles in the unit cell (supercluster).
 const int NSC = 2;                        // Number of MNPs in a supercluster
-const int ceq = 400;                        // Number of steps that is needed for appeoaching equilibrium state.
+const int ceq = 400;                        // Number of steps that are needed for approaching the equilibrium state.
 
 const double muNP = 1.4e-15;                // The magnetic moment of one nanoparticle [J/T or A.m²/kg]
 const double muSC = NSC * muNP;             // The magnetic moment of supercluster [J/T or A.m²/kg]
@@ -58,7 +58,7 @@ const float eta = 0.69e-3;                  // Viscosity of cytoplasm [Pa.s]; 0.
 const float tmax = 1.e6;                     // Maximum of simulation time [τ_D]
 const float zeta = NSC * 8 * pi *           // Random noise torque coefficient
                    pow(aNP, 3) * eta;
-// λ is a unitless constant which compares magnetic energy with thermal fluctuation. The critical value of λ
+// λ is a unitless constant that compares magnetic energy with thermal fluctuation. The critical value of λ
 const float lambdaC = 1/(0.33+0.61/log10(N));
 const float lambdaMax = 12;                 // The maximum of λ
 const float tauD = zeta / (2 * kB * T);     // Debye relaxation time, ζ/(2k_B T) [s]
@@ -71,11 +71,11 @@ const Vector3f a(1, 0, 0),                  // Bases of the triangular Bravais l
 
 
 #define DATA 0
-// If DATA == 1 the snapshots are recorded.
+// If DATA == 1, the snapshots are recorded.
 
 #define DYNAMICS 0
-// If DYNAMICS == 0, the dynamics is simple without any change in external condition.
-// If DYNAMICS == 1, the dynamics is continuing after lambdaMax up to tMax.
+// If DYNAMICS == 0, the dynamics are simple without any change in external condition.
+// If DYNAMICS == 1, the dynamics are continuing after lambdaMax up to tMax.
 
 const static IOFormat CSVFormat(StreamPrecision, DontAlignCols, ", ", "\n");
 
@@ -114,8 +114,8 @@ void init(int rI);                          // Initializing the rIᵗʰ realizat
 void done(int rI);                          // Finalization of rIᵗʰ realization
 
 Vector3f mu_avg();                          // Average of 〈μᵢ〉
-void calcBTotal();                          // calculates the total magnetic field by using coupling tensor in
-                                            // the unit cell and mean field for the reminder of lattice. Then
+void calcBTotal();                          // calculates the total magnetic field by using the coupling tensor in
+                                            // the unit cell and mean field for the remainder of the lattice. Then
                                             // it updates Bₜ[].
 float magEnergy();                          // calculates the total magnetic energy.
 void execute();                             // approaching to equilibrium
@@ -123,16 +123,16 @@ void execute();                             // approaching to equilibrium
 // simulates the system and changes λ from 0 to λₘₐₓ
 void execute(float lambda1);
 
-// simulates the system and increase λ from 0 to λₘₐₓ, where rI is a realization index.
+// simulates the system and increases λ from 0 to λₘₐₓ, where rI is a realization index.
 void execute(int rI);
 
 // Simulates a single hysteresis loop, where λ₀ = 3λc, ΔB shows the linear changes
-// in the external magnetic field in the each step of simulation, B₀ shows the maximum
-// amplitude of external magnetic field,and rI is a realization index.
+// in the external magnetic field in each step of simulation, B₀ shows the maximum
+// amplitude of external magnetic field, and rI is a realization index.
 void executeHysteresis(int rI, const Vector3f dB, const float B0 = 1, const float lambda0 = 3*lambdaC);
 
 // simulates a rotational external magnetic field, where B₀ shows
-// the amplitude of magnetic field and rI is a realization index.
+// the amplitude of the magnetic field and rI is a realization index.
 void executeRotationalB(int rI, const float B0 = 1);
 
 void executeSingleStep();                   // executes a single time step.
@@ -152,13 +152,13 @@ int main (int argc, char *argv[]) { // Main routine
          << "Date: 14010302" << endl;
 
     init_mtutils(10);                        // initiates the OpenMP
-    // Note: Due to the simultaneous use of the SSE instructions set and OpenMP, and the competition between
+    // Note: Due to the simultaneous use of the SSE instruction set and OpenMP, and the competition between
     // the SSE instructions set and the separate cores in using the floating-point units and cache, defining
-    // the maximum allowed value for the number of CPU cores in OpenMP, may not be the best choice due to some
-    // overloads. The appropriate amount depends on the number of actual floating units available and size of
+    // the maximum allowed value for the number of CPU cores in OpenMP may not be the best choice due to some
+    // overloads. The appropriate amount depends on the number of actual floating units available and the size of
     // cache. For cheap processors, half of the number of CPU cores might be enough!
 
-    // Randomize the pseudo random number generator
+    // Randomize the pseudo-random number generator
     randomize();
     lout << "\nseed: " << seed << endl;
 
@@ -177,11 +177,11 @@ int main (int argc, char *argv[]) { // Main routine
     J_inf >> J;
 
     // and initializes the Jinf.
-    Jinf << J , 0 , 0,
-            0 , J , 0,
-            0 , 0 , -2 * J;
+    Jinf << J, 0, 0,
+            0, J, 0,
+            0, 0, -2 * J;
 
-    // Introducing the parameters before begin
+    // Introducing the parameters before beginning
     lout << "unit cell: " << L << " x " << L << "\tNᵣ: " << NR
          << "\nT: "  << T << " [K]\t\tDC part of Bₑₓₜ: (" << BDC.transpose().format(CSVFormat) << ") [B⁎]"
          << "\na: (" << a.transpose().format(CSVFormat) << ")\t\tb: (" << b.transpose().format(CSVFormat) << ')'
@@ -201,7 +201,7 @@ int main (int argc, char *argv[]) { // Main routine
 
         init(r);
 
-        // The following line could be used in the remote ssh running!!!
+        // The following line could be used in the remote SSH running!!!
         lout.echo(false);
 
         // Uncomment one of the following lines according to the simulation plan: //
@@ -209,7 +209,7 @@ int main (int argc, char *argv[]) { // Main routine
         //executeHysteresis(r, Vector3f(0.01, 0, 0), 1);
         //executeRotationalB(r, 1);
 
-        // The following line could be used in the remote ssh running!!!
+        // The following line could be used in the remote SSH running!!!
         lout.echo(true);
 
         done(r);
@@ -354,8 +354,8 @@ Vector3f mu_avg() { // Average of 〈μᵢ〉
     return S / N;
 }
 
-void calcBTotal() { // calculates the total magnetic field by using coupling tensor in the unit cell
-                    // and mean field for the reminder of lattice. Then it updates Bₜ[].
+void calcBTotal() { // calculates the total magnetic field by using the coupling tensor in the unit cell
+                    // and mean field for the remainder of the lattice. Then it updates Bₜ[].
 
     const Vector3f mu_MF = mu_avg();
 
