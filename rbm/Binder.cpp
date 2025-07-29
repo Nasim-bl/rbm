@@ -1,4 +1,4 @@
-/***  Binder cumulant, Ver 0.5, Date: 14010227 ********************************
+/***  Binder cumulant, Ver 0.5, Date: 22 May 2022******************************
  ***                                                                        ***
  ***  Copyleft (ɔ) Nasim. Bolhasan 2020-22, All lefts reserved!             ***
  ***                                                                        ***
