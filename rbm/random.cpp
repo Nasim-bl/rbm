@@ -1,4 +1,4 @@
-/** Implementation of the thread Safe Pseudo Random Number Generator (PRNG), Ver 2.00, Date: 1400-12-20
+/** Implementation of the thread Safe pseudo-random number Generator (PRNG), Ver 2.00, Date: 1400-12-20
  *
  * @file random2.cpp
  * @author O. Farzadian, A. Goodarzinick, F. Bolhasani, and M. D. Niry (m.d.niry at iasbs.ac.ir)
@@ -13,7 +13,7 @@
  *
  * @section DESCRIPTION
  *
- * The functions and routines in this library provides facilities to generate random numbers. They are based on
+ * The functions and routines in this library provide facilities to generate random numbers. They are based on
  * the functions
  *
  *     double ran2(long *idum);
@@ -27,20 +27,20 @@
  * `ran2()` is a long period (\f$> 2 × 10^{18}\f$) random number generator of L. Ecuyer with Bays-Durham shuffle
  * and added safeguards. Returns a uniform random deviate between 0.0 and 1.0 (exclusive of the endpoint values).
  *
- * \attention Call `randomize()` to initiates the default global seed or call functions with idum a negative
+ * \attention Call `randomize()` to initiate the default global seed or call functions with idum a negative
  * integer to initialize; thereafter, do not alter idum or seed between successive deviates in a sequence.
  *
- * @note Code should be compiled with -fopenmp switch of g++ to use an OpenMP mode.
+ * @note Code should be compiled with the -fopenmp switch of g++ to use an OpenMP mode.
  *
  * @section LICENSE
  *
- * The functions and routines in the library are based on the pseudo random number generators (PRNGs) `ran2()`
+ * The functions and routines in the library are based on the pseudo-random number generators (PRNGs) `ran2()`
  * and `gasdev()`, which are implemented in the Numerical Recipes in C, chapter 7.
  *
  * Visit www.nr.com for the lenience.
  *
- * Reminder of codes in the library is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
+ * Reminder of codes in the library is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
@@ -82,7 +82,7 @@ long seed = -36;                            // The default global seed of the PR
  * not available, the global default seed is used.
  *
  * if seed0 is available, `randomize()` renews the default global seed in multi-thread mode to seed0. This
- * option is useful in debug mode!
+ * The option is useful in debug mode!
  @{*/
 void randomize() { // initiates the default global seed of the PRNG.
     #ifdef _OPENMP
@@ -116,7 +116,7 @@ double gasdev(long *idum) {
     static int iset = 0;
     static double gset;
     #ifdef _OPENMP                          // These lines make iset and gset threadsafe variables; each thread
-                                            //  has its own copy of these variables.
+                                            //  has its copy of these variables.
         #pragma omp threadprivate(iset, gset)
     #endif
 
