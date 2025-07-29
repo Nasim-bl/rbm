@@ -1,11 +1,11 @@
-/***  Estimate the J(∞), Ver 1.00, Date: 14010227 *****************************
+/***  Estimate the J(∞), Ver 1.00, Date: 22 May 2022 **************************
  ***                                                                        ***
- ***  Copyleft (ɔ) F. Bolhasani 2020-22, All lefts reserved!                ***
+ ***  Copyleft (ɔ) Nasim 2020-22, All lefts reserved!                       ***
  ***                                                                        ***
  ******************************************************************************
 
  * This code is under construction. It might contain some errors.
- * So you can try it with your own risk!
+ * So you can try it at your own risk!
  */
 
 //#define DEBUG_MODE                          // Activate debug mode
@@ -16,7 +16,6 @@
 #include <iostream>
 #include <fstream>
 #include <math.h>
-//#include <E:\code blocks\CodeBlocks\MinGW\include\eigen3\eigen-3.4.0\Eigen\Dense>
 #include <eigen3/Eigen/Dense>
 #include "utils.h"
 #include "estJ.h"
@@ -31,10 +30,10 @@ const int N = 30;                           // The maximum radius of circle whic
 const static IOFormat CSVFormat(StreamPrecision, DontAlignCols, ", ", "\n");
 
 double estimation(int R, int& count,        // Estimate the J(∞), where a and b are the bases of the Bravais
-                  const Vector3f& a,        // lattice, and count returns numbers of dipoles included in the
+                  const Vector3f& a,        // lattice, and count returns number of dipoles included in the
                   const Vector3f& b);       // estimation.
 
-Matrix3f couplingJ(const Vector3f& r) { // The coupling dyadic between two dipole with relative displacement r.
+Matrix3f couplingJ(const Vector3f& r) { // The coupling dyadic between two dipoles with relative displacement r.
     /** The coupling dyadic is defined as,
      * \f[\stackrel{\scriptstyle\leftrightarrow}{\mathbf{J}}(\mathbf{r}) = \left\{
      * \begin{array}{ll}
@@ -43,7 +42,7 @@ Matrix3f couplingJ(const Vector3f& r) { // The coupling dyadic between two dipol
      * \end{array}
      * \right.\f]
      * This function is optimized to speed up the evaluation of the coupling dyadic more than 3 times.
-     * The body of function before optimization:
+     * The body of the function before optimization:
      * const float r2 = norm2(r);
      * if ( r2 > 0.1e-7 )
      *     return ( 3*Dyadic(r) - r2 * I3x3 ) / ipow(norm(r), 5);
@@ -112,7 +111,7 @@ void Store_Jinf(const Vector3f& a, const Vector3f& b) {
 }
 
 // Following function estimates the J(∞), where a and b are the bases of the Bravais lattice, and count returns
-// numbers of dipoles included in the estimation.
+//number of dipoles included in the estimation.
 double estimation(int R, int& count, const Vector3f& a, const Vector3f& b) {
     count = 0;
     Matrix3d JTotal = Matrix3d::Zero();
