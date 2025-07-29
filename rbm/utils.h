@@ -1,7 +1,7 @@
 /******************************************************************************/
 /*** General Utility                                                        ***/
 /*** Ver 1.62                                                               ***/
-/*** Date: 14010226                                                         ***/
+/*** Date: 17 May 2022                                                      ***/
 /*** Copyleft (c) 2013-2022 by O. Farzadian, M. Zarepour, A. Alipour,       ***/
 /*** L. Elyasizad, M. Delbari, M. Mortazavi Rad, K. Ahmadi, F. Bolhasani,   ***/
 /*** and M. D. Niry. All lefts reserved!                                    ***/
@@ -13,27 +13,27 @@
 
 // Ver 1.55
 // Date: 13951008
-// plot() routines was added to version 1.45 by L. Elyasizad in 2016
+// plot() routines were added to version 1.45 by L. Elyasizad in 2016
 
 // Ver 1.56
 // Date 13980230
 // Backward compatibility was added to version 1.55 by K. Ahmadi in 2019
-// C++11 feature such as nullptr was not supported in older compilers (previous than gcc 4.6)
-// for gcc 4.6 nullptr are experimentally supported and activate when using -std=c1x switch with g++ compiler,
-// for gcc 4.7 nullptr are supported when using -std=c11 switch with g++ compiler,
-// and in the recent gcc compilers this definition is supported by default
+// C++11 feature such as nullptr was not supported in older compilers (previous to gcc 4.6)
+// for gcc 4.6 nullptr is experimentally supported and activated when using -std=c1x switch with g++ compiler,
+// for gcc 4.7, nullptr is supported when using -std=c11 switch with g++ compiler,
+// and in the recent gcc compilers, this definition is supported by default
 
 // Ver 1.57
 // Date 13980304
-// The function reset() was added to logger by K. Ahmadi in 2019.
+// The function reset() was added to the logger by K. Ahmadi in 2019.
 // By this capability, the size of log file can be checked and controlled.
 
 // Ver 1.58
 // Date 13980317
 // The functions start() and stop() were added to logger by M. D. Niry in 2019
-// These two functions add an internal timer to logger.
+// These two functions add an internal timer to the logger.
 // prog and endp are updated to support the progressive log in the log file.
-// This new feature decrease the log file size.
+// This new feature decreases the log file size.
 
 // Ver 1.60
 // Date 13990621
@@ -54,7 +54,7 @@
 //#define DEBUG_MODE                        // Activate the debug mode
 //#define NO_WAIT                           // Deactivate wait() at the end of code; this means the
                                             //‎ The application does not wait at the end of execution in wait().
-                                            // However, this definition must insert in the main code before
+                                            // However, this definition must be inserted in the main code before
                                             //‎ including the utils.h header.
 #include <cstdlib>
 #include <stdio.h>
@@ -95,17 +95,17 @@ inline Number ipow(Number base, int exp) {  // Optimized power function with an 
 
 //------------------------------------------------------------------------------
 // Filename manipulation
-// Check if a file exist
+// Check if a file exists
 inline bool IsFileExist(const char* filename) {
     std::ifstream f(filename);
     return f.good();
 }
 
-// Here, we must reference to:
+// Here, we must refer to:
 // https://stackoverflow.com/questions/6417817/easy-way-to-remove-extension-from-a-filename
 // for the following function.
-// Quote: "More complex, but with respect to special cases (for example: "foo.bar/baz",
-// "c:foo.bar", works for Windows too)"
+// Quote: "More complex, but concerning special cases (for example: "foo.bar/baz",
+// "c: foo.bar", works for Windows too)"
 std::string remove_extension(const std::string& path);
 // Filename manipulation
 //------------------------------------------------------------------------------
@@ -114,15 +114,15 @@ std::string remove_extension(const std::string& path);
 
 //------------------------------------------------------------------------------
 // Backward compatibility section
-// C++11 feature such as nullptr was not supported in older compilers (previous than gcc 4.6)
-// for gcc 4.6 nullptr are experimentally supported and activate when using -std=c1x switch with g++ compiler,
-// for gcc 4.7 nullptr are supported when using -std=c11 switch with g++ compiler,
-// and in the recent gcc compilers this definition is supported by default
+// C++11 feature such as nullptr was not supported in older compilers (previous to gcc 4.6)
+// for gcc 4.6 nullptr is experimentally supported and activated when using -std=c1x switch with g++ compiler,
+// for gcc 4.7,nullptr is supported when using -std=c11 switch with g++ compiler,
+// and in the recent gcc compilers, this definition is supported by default
 #if (defined(__GNUC__) && __GNUC__ > 4) || (defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ >= 6) || \
     (defined(_MSC_VER) && _MSC_VER >= 1900) || defined(__cpp_lib_is_null_pointer)
-    // C++11 features such as nullptr is supported
+    // C++11 features, such as nullpt,r are supported
 #else
-    // C++11 features such as nullptr is not supported
+    // C++11 features, such as nullpt,r are not supported
     #define nullptr NULL
 #endif
 //------------------------------------------------------------------------------
@@ -163,10 +163,10 @@ std::string remove_extension(const std::string& path);
  * endl can be used as in a cout or any other text stream.
  * To on/off streaming to the terminal use eoff/eon, e.g.
  *   lout << "terminal & log file " << eoff << " only log file " << eon << " terminal & log file " << endl;
- * Progressive task are supported by prog and endp. This compatibility work as progress bar in terminal. The
- * text between prog and endp rewrite in a same line of the terminal and the log file, e.g.
+ * Progressive tasks are supported by prog and endp. This compatibility works as a progress bar in the terminal. The
+ * text between prog and endp rewrite in the same line of the terminal and the log file, e.g.
  *   lout << prog << "t: " << time << endp;
- * endp is used here instead of endl to mark end of progressive text. */
+ * endp is used here instead of endl to mark the end of progressive text. */
 class logger {
     private:
         std::ofstream logfile;              // Log file
@@ -175,7 +175,7 @@ class logger {
                                             // 0: Disable
                                             // 1: Inside the presentation of progressive task bar text
                                             // 2: At the end of progressive task bar text (endp)
-        std::clock_t start_time;            // Internal variable used by the timmer
+        std::clock_t start_time;            // Internal variable used by the timer
         int lfp;                            // Store the position of prog at the log file
     public:
         logger(const char* file);
@@ -201,8 +201,8 @@ class logger {
             }
             return *this;
         }
-        logger& reset(long int s);     // See the file pointer at the beginning of the logfile if its size exceeds than s.
-                                       // So, the logfile is filled with periodic condition and part of previous content available
+        logger& reset(long int s);     // See the file pointer at the beginning of the logfile if its size exceeds s.
+                                       // So, the logfile is filled with periodic conditions and part ofthe  previous content available
                                        // at the end of file.
                                        // Example: lout.reset(65536);
         logger& start();               // Start the timer
@@ -272,11 +272,11 @@ inline logger& endp(logger& is) {
 
 //------------------------------------------------------------------------------
 // Plot routines
-/* Using gnuplot to plot (x,y) data point
-   if x is omitted or NULL, the zero based sequential data is used instead of it for x axis.
-   N shows the number of data points in x and y array.
-   xlog and xlog set the x and y axis with the logarithmic scale.
-   tempfilename shows temp file name. If this argument omitted the default file name equal to "temp.txt" is used.
+/* Using gnuplot to plot (x,y) data points
+   . If x is omitted or NULL, the zero-based sequential data is used instead of it for the x-axis.
+   N shows the number of data points in the x and y arrays.
+   xlog and xlog set the x and y axes with the logarithmic scale.
+   tempfilename shows the temp file name. If this argument is omitted, the default file name equal to "temp.txt".
 */
 template <typename Number1, typename Number2>
 inline void plot(Number1* x, Number2* y, int N, bool xlog=false, bool ylog=false, const char* tempfilename=nullptr) {
