@@ -1,39 +1,39 @@
 /******************************************************************************/
 /*** General Utility                                                        ***/
 /*** Ver 1.62                                                               ***/
-/*** Date: 14010226                                                         ***/
+/*** Date: 17 May 2022                                                      ***/
 /*** Copyleft (c) 2013-2022 by O. Farzadian, M. Zarepour, A. Alipour,       ***/
 /*** L. Elyasizad, M. Delbari, M. Mortazavi Rad, K. Ahmadi, F. Bolhasani,   ***/
 /*** and M. D. Niry. All lefts reserved!                                    ***/
 /*** Licensed under The GNU General Public License v3.0                     ***/
 /*** Code implemented in GNU C++ compiler (v. 4.6.3) in 64-bit UBUNTU 12.04 ***/
-/*** Run under an Intel® Core™ i3-2330M CPU @ 2.20GHz × 4 machine with 2 GB ***/
+/*** Run under an IntelÂ® Coreâ„¢ i3-2330M CPU @ 2.20GHz Ã— 4 machine with 2 GB ***/
 /*** RAM.                                                                   ***/
 /******************************************************************************/
 
 // Ver 1.55
 // Date: 13951008
-// plot() routines was added to version 1.45 by L. Elyasizad in 2016
+// plot() routines were added to version 1.45 by L. Elyasizad in 2016
 
 // Ver 1.56
 // Date 13980230
 // Backward compatibility was added to version 1.55 by K. Ahmadi in 2019
 // C++11 feature such as nullptr was not supported in older compilers (previous than gcc 4.6)
-// for gcc 4.6 nullptr are experimentally supported and activate when using -std=c1x switch with g++ compiler,
-// for gcc 4.7 nullptr are supported when using -std=c11 switch with g++ compiler,
-// and in the recent gcc compilers this definition is supported by default
+// for gcc 4.6 nullptr is experimentally supported and activated when using -std=c1x switch with the g++ compiler,
+// for gcc 4.7, nullptr is supported when using -std=c11 switch with the g++ compiler,
+// and in the recent gcc compilers, this definition is supported by default
 
 // Ver 1.57
 // Date 13980304
-// The function reset() was added to logger by K. Ahmadi in 2019.
-// By this capability, the size of log file can be checked and controlled.
+// The function reset() was added to the logger by K. Ahmadi in 2019.
+// By this capability, the size of the log file can be checked and controlled.
 
 // Ver 1.58
 // Date 13980317
 // The functions start() and stop() were added to logger by M. D. Niry in 2019
-// These two functions add an internal timer to logger.
+// These two functions add an internal timer to the logger.
 // prog and endp are updated to support the progressive log in the log file.
-// This new feature decrease the log file size.
+// This new feature decreases the log file size.
 
 // Ver 1.60
 // Date 13990621
@@ -71,10 +71,10 @@ using namespace std;
 
 //------------------------------------------------------------------------------
 // Filename manipulation
-// here, we must reference to:
+// here, we must refer to:
 // https://stackoverflow.com/questions/6417817/easy-way-to-remove-extension-from-a-filename
 // for the following function.
-// Quote: "More complex, but with respect to special cases (for example: "foo.bar/baz", "c:foo.bar",
+// Quote: "More complex, but concerning special cases (for example: "foo.bar/baz", "c:foo.bar",
 // works for Windows too)"
 std::string remove_extension(const std::string& path) {
   if (path == "." || path == "..")
@@ -107,7 +107,7 @@ std::string remove_extension(const std::string& path) {
     tcsetattr(0, TCSANOW, &oldt);
   }
 
-  // Read 1 character from consul (echo defines echo mode)
+  // Read 1 character from console (echo defines echo mode)
   char __getch(bool echo) {
     struct termios oldt;
     InitTerm(echo, oldt);
@@ -116,12 +116,12 @@ std::string remove_extension(const std::string& path) {
     return ch;
   }
 
-  // Read 1 character from consul without echo
+  // Read 1 character from console without echo
   char getch(void) {
     return __getch(false);
   }
 
-  // Read 1 character  from consul with echo
+  // Read 1 character  from console with echo
   char getche(void) {
     return __getch(true);
   }
@@ -157,7 +157,7 @@ logger::logger(const char* file) {
 
     if (!(logfile.is_open())) {
         cerr << "[]: Couldn't open the file \"" << file << "\" for logging.\n";
-        this->~logger();                    // If the log file is opened previously this class is destructed.
+        this->~logger();                    // If the log file is opened previously, this class is destructed.
     }
 }
 
@@ -171,14 +171,14 @@ ofstream& logger::noecho(void) {
     return logfile;
 }
 
-// On/Off the outputs to the consul.
+// On/Off the outputs to the console.
 logger& logger::echo(bool e) {
     em = e;
     return *this;
 }
 
-// Set the file pointer at the beginning of the log file if its size exceeds than s.
-// So, the log file is filled with the periodic condition and part of previous content available
+// Set the file pointer at the beginning of the log file if its size exceeds s.
+// So, the log file is filled with the periodic condition and part of the previous content available
 // at the end of the log file.
 // Example: lout.reset(65536);
 logger& logger::reset(long int s) {
@@ -196,7 +196,7 @@ logger& logger::reset(long int s) {
 logger& logger::start() {                   // Start the timer
     #ifdef _OPENMP                          // clock() measures the total time going on all cores
         start_time = omp_get_wtime();
-    #else                                   // while omp_get_wtime() measure the real time could be measure by a stopwatch.
+    #else                                   // while omp_get_wtime() measure the real time could be measured by a stopwatch.
         start_time = clock();
     #endif
     return *this;
@@ -220,9 +220,9 @@ logger& logger::stop() {                    // Stop the timer and print the dura
 //------------------------------------------------------------------------------
 // Plot routines
 /* Using gnuplot to plot (x,y) data points.
-   utility function creates the header of temporary file used in plot() routines.
+   The utility function creates the header of the temporary file used in plot() routines.
    The xlog and ylog set the x and y-axis with the logarithmic scale.
-   The tempfilename shows the temporary file name. If this argument omitted the default file name equal to "temp.txt" is used.
+   The tempfilename shows the temporary file name. If this argument is omitted, the default file name equal to "temp.txt" is used.
 */
 void GNUPlotHeader(ofstream& temp, bool xlog=false, bool ylog=false) {
     temp << "set ylabel \"y\"\n"
