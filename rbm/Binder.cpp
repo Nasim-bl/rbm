@@ -1,11 +1,11 @@
 /***  Binder cumulant, Ver 0.5, Date: 14010227 ********************************
  ***                                                                        ***
- ***  Copyleft (ɔ) F. Bolhasani 2020-22, All lefts reserved!                ***
+ ***  Copyleft (ɔ) Nasim. Bolhasan 2020-22, All lefts reserved!             ***
  ***                                                                        ***
  ******************************************************************************
  *
  * This code is under construction. It might contain some errors.
- * So you can try it with your own risk!
+ * So you can try it at your own risk!
  */
 
 #include <cstdlib>
@@ -25,13 +25,13 @@ void BinderCumulant::sample(float x2) {     // gets a new sample.
     counter++;
 }
 
-void BinderCumulant::init() {              // initiates the variables and set BC to zero.
+void BinderCumulant::init() {              // initiates the variables and sets BC to zero.
     counter = 0;
     sum2 = sum4 = 0;
     bc = 0;
 }
 
-// calculates Binder cumulant. Then reset to its initial state for a next calculation if r is true.
+// calculates Binder cumulant. Then reset to its initial state for next calculation if r is true.
 float BinderCumulant::BC(bool reset) {
     if (counter > 0) {
         double M2 = sum2 / counter,         // 2ⁿᵈ and  and
