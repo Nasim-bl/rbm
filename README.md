@@ -1,17 +1,30 @@
-This project simulates the collective behaviour(dynamic) of a model within magnetic dipoles arranged in a 2D triangular lattice (fig?). 
-In this model, dipoles are fixed in position, but can rotate in 3D. 
-They experience dipole interaction and thermal fluctuations, which create a rotational Brownian motion (RBM) at low Reynolds numbers, and magnetic interaction is the external magnetic field is on. 
+This project simulates the collective behavior (dynamic) of a model including magnetic dipoles arranged in a 2D triangular lattice (Fig.?). 
+In this model, dipoles are fixed in their position, but can rotate in 3D. 
+They experience dipole interaction and thermal fluctuations, which create a rotational Brownian motion (RBM) at low Reynolds numbers. 
+We compared the results in the absence and presence of (DC) external magnetic field. 
 
-This project has 2 aims: 
-1) finding the critical behaviour (phase transition) of the system when there is no magnetic field, through a continuous phase transition. 
-   - To do this: we studied To explore this, we studeied key thermodynamic parameters such as magnetization, magnetic energy, susceptibility, and heat capacity. Well we found it!  (fig?)
-2) Secondly, we wanted to know if this long-term ordering can last when the field is on. Well we found out, it vanishes when we applied B in-plane (xy-direction), while with the vertical component (z-direction), it was preserved(fig?). However, there exists a limit to this effect, naed as the "critical threshold range," which we identify by analyzing data across various lattice sizes. 
+--- This project have 2 aims: 
+1) To find an organized collective behaviour in the dynamics of this dipolar system.
+   More advanced, we looked for a continuous phase transition of the system without an external magnetic field. 
+   - To explore this, thermodynamic parameters such as magnetization $(m)$, susceptibility ($\chi$), magnetic energy ($u$), and heat capacity($c$) are studied. 
+3) Finding out if this long-term ordering can last when the field is on.
+
+
+---Results:  it vanishes when we applied B in-plane (xy-direction), while with the vertical component (z-direction), it was preserved(fig?). However, there exists a limit to this effect, naed as the "critical threshold range," which we identify by analyzing data across various lattice sizes. 
 In other words, neither an external magnetic field nor thermal fluctuations can fully disrupt the ordering in this dipolar system, characterized by a continuous phase transition.
 
-🔍 Motivation
-Well, what are these results good for? 
+🔍 Motivation: 
+Magnetic nanostructures, including thin films, are of great interest due to their unique properties at small scales; hence and understanding the dynamics of magnetic nanostructures is essential for optimizing their performance in both technological and biological contexts. 
+Among the particles in these materials, there are long-range dipolar interactions, which create complexities that are not well addressed by conventional models, such as the Ising and Heisenberg models. 
+These models, while effective for studying atomic-scale systems dominated by short-range exchange interactions, are insufficient for describing systems at the nanoscale or mesoscale, where long-range forces and anisotropic effects play a dominant role.
+Dipolar interactions are fundamentally different from exchange interactions. 
+Unlike the binary nature of exchange interactions (e.g., ±1 spins in the Ising model), dipolar interactions depend on the spatial orientation of the dipoles. 
+For instance, head-to-tail alignment leads to attractive forces, while perpendicular alignment creates repulsion. 
+This anisotropy makes dipolar systems inherently different from traditional models, even when long-range interactions are added as corrections. 
+Furthermore, models based solely on exchange interactions fail to capture critical behaviors in the presence of external magnetic fields or thermal fluctuations, challenges that our approach seeks to address. 
 
-- This finding contrasts with models like the Heisenberg model, where the Mermin-Wagner theorem prohibits such transitions due to the dominance of short-range interactions.
+Now in this project, we aim to study a nanostructure model that consists of these long-term dipole interactions but in 2D. 
+
 
 
 
@@ -20,18 +33,8 @@ Rotational Langevin Dynamics: Models the random rotation of dipoles due to tempe
 
 Molecular Dynamics (MD): Captures the time evolution of dipole orientations.
 
-Triangular Lattice: Used to model fixed positions.
-
 Periodic Boundary + Mean-Field: Prevents artificial edge effects due to long-range interactions.
 
-📊 Key Parameters Measured
-Magnetization ($m$): average orientation of dipoles
-
-Susceptibility ($\chi$): response to magnetic field
-
-Magnetic Energy ($u$)
-
-Heat Capacity ($c$)
 
 🌡️ Results
 Without an external field:
