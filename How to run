@@ -1,20 +1,17 @@
-- Requirements: 
-		Linux or macOS
-		g++ with C++11 support
-		make
-		Eigen3
-		OpenMP (optional but recommended)
+## Build & Run
 
-- Build: 
-		From the rbm/ directory (where the Makefile is located): 
-		  make release
-		This builds the executable rbm using optimization flags and OpenMP.
+### Requirements
+- Linux or macOS
+- `g++` with C++11 support
+- `make`
+- Eigen3
+- OpenMP (optional but recommended)
 
-		A non-OpenMP build is also available:
-			make
+### Build
+From the `rbm/` directory (where the `Makefile` is located):
 
-- Run: 
- 		./rbm
+```bash
+make release
 
 	On the first run, the code automatically generates J_inf.csv if it does not exist, then starts the simulation.
 
