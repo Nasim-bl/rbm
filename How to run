@@ -1,0 +1,50 @@
+- Requirements: 
+		Linux or macOS
+		g++ with C++11 support
+		make
+		Eigen3
+		OpenMP (optional but recommended)
+
+- Build: 
+		From the rbm/ directory (where the Makefile is located): 
+		  make release
+		This builds the executable rbm using optimization flags and OpenMP.
+
+		A non-OpenMP build is also available:
+			make
+
+- Run: 
+ 		./rbm
+
+	On the first run, the code automatically generates J_inf.csv if it does not exist, then starts the simulation.
+
+- Output: 
+		For each realization (r = 1 ... NR), the code writes:
+			result<r>.txt — simulation results (magnetization, energy, Binder cumulant, external field components, etc.)
+
+		Output files are written to the current directory.
+
+*************************************************************
+- Optional: snapshots
+
+		Snapshots are disabled by default.
+		To enable them, edit rbm.cpp and set:
+			#define DATA 1
+
+		Then rebuild and run again. Snapshot files will be written as:
+			snapshot<r>.txt
+
+- Changing simulation mode: 
+		By default, the code performs a λ-sweep using:
+			execute(r);
+
+- Other simulation modes can be enabled by editing main() in rbm.cpp and rebuilding:
+	Hysteresis loop:
+		executeHysteresis(r, Vector3f(0.01, 0, 0), 1);
+
+	Rotating external magnetic field:
+		executeRotationalB(r, 1);
+
+- Cleaning build files: 
+		make clean
+
