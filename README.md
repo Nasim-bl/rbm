@@ -1,14 +1,6 @@
-This study investigates the dynamic behavior of a system consisting of single-domain (SD) magnetic
-dipoles under the influence of static magnetic fields. These dipoles are organized in a two-dimensional
-triangular Bravais lattice and experience dipole-dipole interaction along with rotational Brownian
-motion. By analyzing some thermodynamic parameters, such as magnetization, susceptibility, thermal
-capacity, and magnetic energy, we observe a spontaneous symmetry breaking that signifies a continuous
-phase transition in the absence of an external magnetic field. However, this phase transition vanishes
-when a magnetic field is introduced within the lattice plane. Nevertheless, we demonstrate that it can
-still be sustained vertically, albeit only up to a critical threshold, by applying an external magnetic
-field. By extrapolating data obtained from different lattice sizes, we have determined this threshold
-to be approximately one-tenth of the average geomagnetic field strength in the thermodynamic limit.
-This discovery holds significant implications for magnetic systems that involve long-term interactions
-and exhibit continuous phase transitions, phenomena that models like the Ising model cannot explain.
-Furthermore, it offers the potential to gain analytical insights into the interaction between biogenic
-magnetic nanoparticles (MNs) and the geomagnetic fields in living organisms.
+This file contains the simulation codes developed for my MSc thesis “Rotational Brownian Dynamics of a System Consisting of Magnetic Dipoles.”
+The codes simulate a two-dimensional triangular lattice of single-domain magnetic dipoles that are fixed in position but free to rotate in three dimensions. The dipoles interact via long-range dipole–dipole interactions and are subject to thermal fluctuations modeled as rotational Brownian motion. The main simulation code is rbm.cpp.
+The primary goal of this work is to investigate whether this system exhibits a continuous phase transition. According to the Mermin–Wagner theorem, such transitions are forbidden in 2D systems with short-range interactions. However, we hypothesize that the long-range nature of dipolar interactions allows a continuous phase transition to occur.
+To test this, we study collective behavior using thermodynamic quantities such as magnetization, magnetic energy, susceptibility, and heat capacity, in the absence of an external magnetic field. Despite the presence of thermal noise, the system shows a continuous phase transition, confirming our hypothesis. Relevant results can be found in results/no_magnetic_field.
+We then apply an external magnetic field. We find that an in-plane (xy-direction) field suppresses the phase transition, while a perpendicular (z-direction) field allows it to persist up to a critical threshold. This threshold is identified by analyzing systems with different lattice sizes. These results are provided in results/with_magnetic_field.
+The simulations are performed using a Molecular Dynamics framework with Euler integration, allowing direct access to the time-dependent evolution of dipole configurations. Finite-size and boundary effects arising from long-range interactions are handled using periodic boundary conditions combined with a mean-field treatment.
