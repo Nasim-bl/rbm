@@ -3,14 +3,7 @@
  ***  Copyleft (ɔ) Nasim 2020-22, All lefts reserved!                       ***
  ***                                                                        ***
  ******************************************************************************
-
- * You can compile this code by the following command in the shell on a
- * single-core machine:
- * > g++ -o rbm rbm.cpp utils.cpp random.cpp vec.cpp -std=c++1z -Ofast
- *, then execute it in the shell by
- * > ./rbm
  
-
  * This code is under construction. It might contain some errors.
  * So you can try it at your own risk!
  */
@@ -38,12 +31,10 @@ using namespace Eigen;
 
 // Constants //
 // ========= //
-const int NR = 500;                          // Number of realization
+const int NR = 500;                         // Number of realizations (ensembles)
 const int L = 30;                           // L x L unit cell lattice
-const int N = sqr(L);                       // Number of dipoles in the unit cell (supercluster).
-const int NSC = 2;                        // Number of MNPs in a supercluster
-const int ceq = 400;                        // Number of steps that are needed for approaching the equilibrium state.
-
+const int N = sqr(L);                       // Number of dipoles in the unit cell (supercluster) 
+const int ceq = 400;                        // Number of steps that are needed for approaching the equilibrium state
 const double muNP = 1.4e-15;                // The magnetic moment of one nanoparticle [J/T or A.m²/kg]
 const double muSC = NSC * muNP;             // The magnetic moment of supercluster [J/T or A.m²/kg]
 const double kB = 1.38e-23;                 // Boltzmann constant [J/K]
@@ -148,7 +139,7 @@ void exportSnapshot(int id);                // exports the current state to the 
 int main (int argc, char *argv[]) { // Main routine
 
     lout << "\nRotaional Brownian Motion, Ver 1.22\n"
-         << "Copyleft (ɔ) F. Bolhasani 2020-22, All lefts reserved!\n"
+         << "Copyleft (ɔ) Nasim 2020-22, All lefts reserved!\n"
          << "Date: 14010302" << endl;
 
     init_mtutils(10);                        // initiates the OpenMP
@@ -681,3 +672,4 @@ void exportSnapshot(int id) { // exports the current state to the snapshot strea
     }
     snapshot << "]}" << endl;
 }
+
