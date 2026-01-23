@@ -1,7 +1,7 @@
-# 1)Get the code: 
+\b{(1) Get the code:}
 Clone the repository and navigate to the rbm/ directory, which contains the Makefile and rbm.cpp.
 
-# 2) Requirements: 
+2) Requirements: 
       Linux or macOS
       g++ with C++11 support
       make
