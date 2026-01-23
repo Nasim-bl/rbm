@@ -1,32 +1,55 @@
-Build & Run
-Requirements
-•	Linux or macOS
-•	g++ with C++11 support
-•	make
-•	Eigen3
-•	OpenMP (optional but recommended)
-Build
-From the rbm/ directory (where the Makefile is located):
-make release
-A non-OpenMP build is also available:
-make
-Run
-./rbm
-On the first run, the code automatically generates J_inf.csv if it does not exist, and then starts the simulation.
-Output
-For each realization (r = 1 ... NR), the code writes result<r>.txt files containing magnetization, energy, Binder cumulant, and external field components.
-All output files are written to the current directory.
-Optional: Snapshots
-Snapshots are disabled by default. To enable them, edit rbm.cpp and set:
-#define DATA 1
+# 1)Get the code: 
+Clone the repository and navigate to the rbm/ directory, which contains the Makefile and rbm.cpp.
+
+# 2) Requirements: 
+      Linux or macOS
+      g++ with C++11 support
+      make
+      Eigen3 (header-only library)
+      OpenMP (optional but recommended)
+
+# 3) Build: 
+    a) Recommended (OpenMP enabled): 
+       make release
+    b) Non-OpenMP build: 
+       make
+
+# 4) Run: 
+    ./rbm
+On the first run, the code automatically generates J_inf.csv if it does not exist.
+You can also force regeneration using:
+    ./rbm -Jinf
+
+# 6) Output files
+  For each realization r = 1 ... NR, the code generates:
+    result<r>.txt
+
+Each file contains magnetization, energy, Binder cumulant, external magnetic field components, and time evolution data.
+All files are written to the current directory.
+
+
+# 7) Optional: Snapshots
+     Snapshots are disabled by default. 
+     To enable them, edit rbm.cpp and set:
+       #define DATA 1
+
 Then rebuild and run again. Snapshot files will be written as snapshot<r>.txt.
-Changing Simulation Mode
-By default, the code performs a λ-sweep using:
-execute(r);
-Other simulation modes can be enabled by editing main() in rbm.cpp and rebuilding.
-•	Hysteresis loop:
+
+# 8) Changing Simulation Mode: 
+     Default mode:
+        execute(r);
+
+Other available modes (edit main() in rbm.cpp):
 executeHysteresis(r, Vector3f(0.01, 0, 0), 1);
-•	Rotating external magnetic field:
 executeRotationalB(r, 1);
-Cleaning Build Files
-make clean
+
+# 9) Compile-time parameters
+    Important parameters are defined at the top of rbm.cpp, including:
+      NR (number of realizations)
+      L (lattice size)
+      lambdaMax, ceq, tmax
+      BDC0, BDC1 (external fields)
+
+
+# 10) Cleaning Build Files: 
+      make clean
